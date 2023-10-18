@@ -1,6 +1,6 @@
 # bitcoin-key-printer
 
-_Bitcoin Key Printer_ est un programme Python qui offre une interface conviviale pour la gestion des clés cryptographiques dans l'écosystème Bitcoin. Ce README explique les caractéristiques fondamentales du code et la logique derrière nos choix d'implémentation.
+_Bitcoin Key Printer_ est un programme Python qui offre une interface conviviale pour la gestion des clés cryptographiques dans l'écosystème Bitcoin. Ce programme Python simplifie la génération de clés, améliore la sécurité grâce au cryptage et facilite le partage sans effort via des codes QR. En tirant parti de bibliothèques puissantes telles que base58 et ecdsa, Bitcoin Key Printer assure une gestion sécurisée et efficace des clés. 
 
 ## Caractéristiques du Code
 
@@ -62,6 +62,48 @@ pip install -r requirements.txt
    - Exécutez le programme:
 ```bash
 python3 main.py
+```
+## Utilisation
+
+   - ´Générer une paire de clés
+
+Cette option génère une paire aléatoire de clés privées-publiques Bitcoin et l'affiche.
+
+```vbnet
+python3 main.py
+1. Generate Key Pair
+2. Encrypt and Store Private Key
+3. Generate QR Code
+4. Exit
+Enter your choice: 1
+```
+   - Chiffrer et stocker la clé privée:
+
+Chiffre une clé privée pour un stockage sécurisé et génère une version cryptée.
+
+```vbnet
+$ python3 main.py
+1. Generate Key Pair
+2. Encrypt and Store Private Key
+3. Generate QR Code
+4. Exit
+Enter your choice: 2
+Enter your private key: <enter your private key>
+Encrypted Private Key: <encrypted private key>
+```
+   - Générer un QRCode:
+
+Génère un code QR pour une clé publique Bitcoin, utile pour les transactions et le partage.
+
+```vbnet
+$ python3 main.py
+1. Generate Key Pair
+2. Encrypt and Store Private Key
+3. Generate QR Code
+4. Exit
+Enter your choice: 3
+Enter your public key: <enter your public key>
+QR code generated and saved as qrcode.png.
 ```
 ## Contribution
 
