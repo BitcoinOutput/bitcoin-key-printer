@@ -20,6 +20,12 @@ En tirant parti des deux encodages, notre programme maintient un équilibre entr
 
 Puisque nous utilisons l'encodage base58, nous devons nous assurer que la clé passée au constructeur Fernet soit une chaîne d'octets codée en base64.
 
+   _Renforcement de clé avec PBKDF2 & salt: PBKDF2 est utilisé pour renforcer les clés, ce qui signifie qu'il prend un mot de passe relativement faible et le renforce en une clé cryptographique forte. Le paramètre de nombre d'itérations (dans notre cas, 100000) détermine combien de fois la fonction de hachage (SHA-256) est appliquée au mot de passe. Chaque itération augmente la complexité du calcul, ce qui rend plus difficile et plus long pour un attaquant de forcer brutalement le mot de passe.
+
+Un salt est une valeur aléatoire générée pour chaque utilisateur. Il est utilisé comme entrée supplémentaire à côté du mot de passe lors de la dérivation des clés. Le but du salt est d'empêcher les attaquants d'utiliser des tables précalculées (tables arc-en-ciel) pour la fissuration par mot de passe. En ajoutant un salt unique pour chaque utilisateur, même si deux utilisateurs ont le même mot de passe, leurs clés dérivées seront différentes en raison des sels différents. Dans notre programme, le salt est généré en utilisant `os.urandom(16)`, créant une valeur aléatoire de '16 octets (128 bits)'.
+
+PBKDF2 garantit que la clé dérivée est irréalisable sur le plan informatique pour inverser, offrant un haut niveau de sécurité. En utilisant PBKDF2 avec une forte fonction de hachage, un sel aléatoire et un nombre élevé d'itérations, 'Bitcoin_key_printer' renforce le mot de passe fourni par l'utilisateur en une clé de cryptage sécurisée. Cette clé dérivée est ensuite utilisée dans les processus de cryptage et de déchiffrement, garantissant la confidentialité des données sensibles, telles que les clés privées dans notre application.
+
 ### 3. Génération de Code QR
 
    _Code QR pour la Clé Publique:_ Les clés publiques sont encodées en codes QR pour faciliter le partage et l'utilisation dans les transactions Bitcoin. Cela offre un moyen rapide et fiable de faire des transactions avec d'autres utilisateurs dans l'écosystème Bitcoin.
